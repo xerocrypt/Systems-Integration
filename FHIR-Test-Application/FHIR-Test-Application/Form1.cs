@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -50,6 +51,45 @@ namespace FHIR_Test_Application
                 txtOutput.Text = txtOutput.Text + p.Id + " " + p.Name + "\r\n";
             }
      
-        } 
+        }
+
+        private void cmdCreatePatient_Click(object sender, EventArgs e)
+        {
+            // Code for creating a patient here.
+            // Patientidentifier variables
+            var MyPatient = new Hl7.Fhir.Model.Patient();
+            
+            var PatientName = new Hl7.Fhir.Model.HumanName();
+            PatientName.Use = Hl7.Fhir.Model.HumanName.NameUse.Official;
+
+            string patientFirstName = txtFirstName.Text;
+            string patientSurname = txtSurname.Text;
+            string patientTitle = cmbPatientTitle.Text;
+            string patientNumber = txtPatientNum.Text;
+
+            
+            PatientName.Prefix = new string[] { patientTitle };
+            PatientName.Given = new string[] { patientFirstName };
+            PatientName.Family = new string[] { patientSurname };
+
+            MyPatient.Name = new List<Hl7.Fhir.Model.HumanName>();
+            MyPatient.Name.Add(PatientName);
+
+            // Institution patient identifiers
+            var PatientIdentifier = new Hl7.Fhir.Model.Identifier();
+            PatientIdentifier.System = "https://medical-test.net";
+            PatientIdentifier.Value = patientNumber;
+            MyPatient.Identifier = new List<Hl7.Fhir.Model.Identifier>();
+            MyPatient.Identifier.Add(PatientIdentifier);
+            
+            string xml = Hl7.Fhir.Serialization.FhirSerializer.SerializeResourceToXml(MyPatient);
+            XDocument xDoc = XDocument.Parse(xml);
+            txtOutput.Text = xDoc.ToString();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
