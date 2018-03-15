@@ -31,6 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmdCreatePatient = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.txtFirstName = new System.Windows.Forms.TextBox();
@@ -39,10 +40,12 @@
             this.lblFirstName = new System.Windows.Forms.Label();
             this.lblPatientNumber = new System.Windows.Forms.Label();
             this.grpIdentifiers = new System.Windows.Forms.GroupBox();
-            this.txtOutput = new System.Windows.Forms.TextBox();
-            this.cmdCreatePatient = new System.Windows.Forms.Button();
-            this.cmbPatientTitle = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cmbPatientTitle = new System.Windows.Forms.ComboBox();
+            this.txtOutput = new System.Windows.Forms.TextBox();
+            this.dlgBrowseFolder = new System.Windows.Forms.FolderBrowserDialog();
+            this.cmdSelectFile = new System.Windows.Forms.Button();
+            this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.grpIdentifiers.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +55,7 @@
             this.button1.BackColor = System.Drawing.Color.Indigo;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(7, 22);
+            this.button1.Location = new System.Drawing.Point(6, 16);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 35);
@@ -66,7 +69,7 @@
             this.button2.BackColor = System.Drawing.Color.Indigo;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(7, 65);
+            this.button2.Location = new System.Drawing.Point(99, 100);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 35);
@@ -77,6 +80,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmdSelectFile);
             this.groupBox1.Controls.Add(this.cmdCreatePatient);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button1);
@@ -85,17 +89,31 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(233, 131);
+            this.groupBox1.Size = new System.Drawing.Size(199, 145);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // cmdCreatePatient
+            // 
+            this.cmdCreatePatient.BackColor = System.Drawing.Color.Indigo;
+            this.cmdCreatePatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdCreatePatient.ForeColor = System.Drawing.Color.White;
+            this.cmdCreatePatient.Location = new System.Drawing.Point(6, 57);
+            this.cmdCreatePatient.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmdCreatePatient.Name = "cmdCreatePatient";
+            this.cmdCreatePatient.Size = new System.Drawing.Size(87, 35);
+            this.cmdCreatePatient.TabIndex = 11;
+            this.cmdCreatePatient.Text = "Create";
+            this.cmdCreatePatient.UseVisualStyleBackColor = false;
+            this.cmdCreatePatient.Click += new System.EventHandler(this.cmdCreatePatient_Click);
             // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.Indigo;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(109, 22);
+            this.button3.Location = new System.Drawing.Point(99, 16);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(88, 35);
             this.button3.TabIndex = 2;
@@ -183,29 +201,15 @@
             this.grpIdentifiers.TabStop = false;
             this.grpIdentifiers.Text = "Patient Identity";
             // 
-            // txtOutput
+            // label1
             // 
-            this.txtOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtOutput.Location = new System.Drawing.Point(13, 211);
-            this.txtOutput.Multiline = true;
-            this.txtOutput.Name = "txtOutput";
-            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtOutput.Size = new System.Drawing.Size(349, 148);
-            this.txtOutput.TabIndex = 10;
-            // 
-            // cmdCreatePatient
-            // 
-            this.cmdCreatePatient.BackColor = System.Drawing.Color.Indigo;
-            this.cmdCreatePatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdCreatePatient.ForeColor = System.Drawing.Color.White;
-            this.cmdCreatePatient.Location = new System.Drawing.Point(110, 63);
-            this.cmdCreatePatient.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cmdCreatePatient.Name = "cmdCreatePatient";
-            this.cmdCreatePatient.Size = new System.Drawing.Size(87, 35);
-            this.cmdCreatePatient.TabIndex = 11;
-            this.cmdCreatePatient.Text = "Create";
-            this.cmdCreatePatient.UseVisualStyleBackColor = false;
-            this.cmdCreatePatient.Click += new System.EventHandler(this.cmdCreatePatient_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 17);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Title:";
             // 
             // cmbPatientTitle
             // 
@@ -223,15 +227,37 @@
             this.cmbPatientTitle.Size = new System.Drawing.Size(75, 25);
             this.cmbPatientTitle.TabIndex = 9;
             // 
-            // label1
+            // txtOutput
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 17);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Title:";
+            this.txtOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtOutput.Location = new System.Drawing.Point(13, 211);
+            this.txtOutput.Multiline = true;
+            this.txtOutput.Name = "txtOutput";
+            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtOutput.Size = new System.Drawing.Size(349, 148);
+            this.txtOutput.TabIndex = 10;
+            // 
+            // dlgBrowseFolder
+            // 
+            this.dlgBrowseFolder.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
+            // 
+            // cmdSelectFile
+            // 
+            this.cmdSelectFile.BackColor = System.Drawing.Color.Indigo;
+            this.cmdSelectFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdSelectFile.ForeColor = System.Drawing.Color.White;
+            this.cmdSelectFile.Location = new System.Drawing.Point(99, 57);
+            this.cmdSelectFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmdSelectFile.Name = "cmdSelectFile";
+            this.cmdSelectFile.Size = new System.Drawing.Size(87, 35);
+            this.cmdSelectFile.TabIndex = 12;
+            this.cmdSelectFile.Text = "File...";
+            this.cmdSelectFile.UseVisualStyleBackColor = false;
+            this.cmdSelectFile.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // dlgOpenFile
+            // 
+            this.dlgOpenFile.FileName = "openFileDialog1";
             // 
             // frmMain
             // 
@@ -246,6 +272,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMain";
             this.Text = "FHIR Test Client";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.grpIdentifiers.ResumeLayout(false);
             this.grpIdentifiers.PerformLayout();
@@ -271,6 +298,9 @@
         private System.Windows.Forms.Button cmdCreatePatient;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbPatientTitle;
+        private System.Windows.Forms.FolderBrowserDialog dlgBrowseFolder;
+        private System.Windows.Forms.Button cmdSelectFile;
+        private System.Windows.Forms.OpenFileDialog dlgOpenFile;
     }
 }
 

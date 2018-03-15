@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using System.Windows.Forms;
 using Hl7.Fhir;
 using Hl7.Fhir.Rest;
 using Hl7.Fhir.Model;
+using Hl7.Fhir.Serialization;
 
 namespace FHIR_Test_Application
 {
@@ -50,7 +53,6 @@ namespace FHIR_Test_Application
                 Patient p = (Patient)entry.Resource;
                 txtOutput.Text = txtOutput.Text + p.Id + " " + p.Name + "\r\n";
             }
-     
         }
 
         private void cmdCreatePatient_Click(object sender, EventArgs e)
@@ -90,6 +92,31 @@ namespace FHIR_Test_Application
         private void button3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+            dlgOpenFile.DefaultExt = "xml";
+
+
+
+            //XmlReader xmlread = XmlReader.Create(new StreamReader(@"sample-patient.xml"));
+            //var extractFirstName = (Patient)FhirParser.ParseResource(xmlread);
+
+            DataSet xmlPatient = new DataSet();
+            txtOutput.Text = xmlPatient.ReadXml(@"sample-patient.xml").ToString();
+            
         }
     }
 }
