@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+		<script src="scripts/jquery-3.3.1.min.js"></script>
+	</head>
+
+	<body>
+		<h2>FHIR Client</h2>
+
+		<p id="demo"></p>
+		<div class="mypanel"></div>
+
+		<b>Patient ID:</b>
+
+		<td><input type="text" name="start" id="start"></td>
+		<input id="Search" type="button" class="btn btn-default" value="Search..." onclick="doFunction();" /></br></br>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Patient Details</div>
+			<div class="panel-body" id="demographics"></div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Patient Details</div>
+			<div class="panel-body" id="detailsview"></div>
+		</div>
+
+		<script>
+			function doFunction()
+			{
+				var patientId = document.getElementById("start").value;
+				$.getJSON('http://hapi.fhir.org/baseDstu3/Patient/' + patientId + '/_history/1?_pretty=true&_format=json', function(data)
+				{
+					var text = `Patient ID: ${data.id}<br>
+						Last Updated: ${data.meta.lastUpdated}<br>
+						Family Name: ${data.name.family}</br>
+						Birth Date: ${data.birthDate}</br>
+						Gender: ${data.gender}</br></br>
+						<b>Demographics:</b> ${data.text.div}`
+        
+					$("#demographics").html(text);
+					$("#detailsview").html(text);
+				});
+			}
+		</script>
+    
+	</body>
+</html>

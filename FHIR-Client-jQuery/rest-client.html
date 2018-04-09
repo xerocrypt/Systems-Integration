@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+  <script src="scripts/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+
+<h2>FHIR Client</h2>
+
+<p id="demo"></p>
+<div class="mypanel"></div>
+
+2362616
+
+		<td><input type="text" name="start" id="start"></td>
+<input id="clickMe" type="button" value="Search..." onclick="doFunction();" />
+
+    <script>
+	function doFunction() {
+	var patientId = document.getElementById("start").value;
+    $.getJSON('http://hapi.fhir.org/baseDstu3/Patient/' + patientId + '/_history/1?_pretty=true&_format=json', function(data) {
+        
+        var text = `Patient ID: ${data.id}<br>
+                    Last Updated: ${data.meta.lastUpdated}<br>
+                    Family Name: ${data.name.family}</br>
+					Birth Date: ${data.birthDate}</br>
+					Gender: ${data.gender}</br>
+					Content: ${data.text.div}`
+                    
+        
+        $(".mypanel").html(text);
+    });
+}
+
+    </script>
+    
+
+</body>
+</html>
