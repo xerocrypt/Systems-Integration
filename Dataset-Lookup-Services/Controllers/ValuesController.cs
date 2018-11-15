@@ -6,12 +6,10 @@ using System.Data.SqlClient;
 using DatasetLookupWebService.Classes;
 using DatasetLookupWebService.Models;
 
-
-namespace MRDSLLookupWebService.Controllers
+namespace DatasetLookupWebService.Controllers
 {
     public class ValuesController : ApiController
     {
-
         referenceDatabaseEntities Db = new referenceDatabaseEntities();
         GetDbReader getDbReader = new GetDbReader();
         ConstructItem AddItem = new ConstructItem();
@@ -21,7 +19,6 @@ namespace MRDSLLookupWebService.Controllers
         {
             SqlCommand SqlCommand;
             SqlDataReader reader;
-
 
             // Pass 'category' and 'validItemsOnly' to the DB Reader method
             getDbReader.GetReader(category, validItemsOnly, out SqlCommand, out reader);
